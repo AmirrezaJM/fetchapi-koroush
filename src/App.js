@@ -1,5 +1,10 @@
+import { Suspense } from 'react';
 import './App.css';
 import Swr from './swr';
+import { ErrorBoundary } from 'react-error-boundary';
+import Posts from './tanstackQuery';
+import ErrorFallback from './error';
+import Loading from './loading';
 
 function App() {
   return (
@@ -8,8 +13,17 @@ function App() {
         header
       </header>
       <main className="App-main">
-        main section
-        <Swr />
+        {/* <h2>SWR</h2>
+        <Swr /> */}
+        <h2>TanStack Query fetching</h2>
+        <ErrorBoundary fallback={<ErrorFallback />}>
+          <Suspense fallback={<Loading />}>
+            <Posts />
+          </Suspense>
+        </ErrorBoundary>
+        {/* <HydrationBoundary>
+
+        </HydrationBoundary> */}
       </main>
       <footer className="App-footer">
         footer
